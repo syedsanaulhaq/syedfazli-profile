@@ -531,6 +531,7 @@ h3 {
 
 .moodle-pill { border-color: rgba(230, 96, 0, 0.2); }
 .powerbi-pill { border-color: rgba(242, 199, 17, 0.35); }
+.copilot-pill { border-color: rgba(255, 255, 255, 0.18); }
 
 .cert-grid {
   display: grid;

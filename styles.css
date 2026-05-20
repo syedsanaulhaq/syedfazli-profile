@@ -322,6 +322,26 @@ h3 {
   align-items: start;
 }
 
+#credentials.section-grid {
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+#credentials .credential-wrap {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-top: 0;
+}
+
+#credentials .credential-card {
+  padding: 2rem;
+}
+
+#credentials .credential-card h3 {
+  margin-top: 0;
+  font-size: 1.1rem;
+}
+
 .summary-card p:first-child {
   margin-top: 0;
 }

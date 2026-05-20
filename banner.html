@@ -2,224 +2,245 @@
 <html>
 <head>
 <meta charset="UTF-8"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet"/>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { width: 1080px; height: 1080px; overflow: hidden; font-family: 'Segoe UI', Arial, sans-serif; background: #0a0a0a; }
+  body { width: 1080px; height: 1080px; overflow: hidden; font-family: 'Manrope', 'Segoe UI', Arial, sans-serif; background: #0a0a0a; }
 
   .banner {
     width: 1080px;
     height: 1080px;
-    background: linear-gradient(160deg, #0d1f1c 0%, #0d2e28 55%, #0a1a17 100%);
     position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 80px 90px;
     overflow: hidden;
-    text-align: center;
   }
 
-  /* background grid pattern */
-  .banner::before {
-    content: '';
+  /* Photo background */
+  .bg-photo {
     position: absolute;
     inset: 0;
-    background-image:
-      linear-gradient(rgba(13,107,93,0.08) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(13,107,93,0.08) 1px, transparent 1px);
-    background-size: 54px 54px;
+    background: url('./assets/personalpic.png') center top / cover no-repeat;
+    filter: brightness(0.85);
   }
 
-  /* glow orbs */
-  .orb {
+  /* Dark gradient overlay — bottom two-thirds readable */
+  .overlay {
     position: absolute;
-    right: -120px;
-    top: -120px;
-    width: 700px;
-    height: 700px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(13,107,93,0.22) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .orb2 {
-    position: absolute;
-    left: -120px;
-    bottom: -140px;
-    width: 500px;
-    height: 500px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(217,143,73,0.1) 0%, transparent 70%);
-    pointer-events: none;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.0)   0%,
+      rgba(0,0,0,0.1)  25%,
+      rgba(0,0,0,0.55) 48%,
+      rgba(5,20,18,0.92) 68%,
+      rgba(5,20,18,1.0) 100%
+    );
   }
 
+  /* Subtle teal tint at very bottom edge */
+  .overlay::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 260px;
+    background: linear-gradient(to top, rgba(13,107,93,0.18), transparent);
+  }
+
+  /* Content sits above overlays */
   .content {
-    position: relative;
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 0 72px 70px;
     z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0;
-    width: 100%;
   }
 
-  .initials-circle {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #0d6b5d, #0a4f45);
-    border: 3px solid rgba(13,107,93,0.6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 48px;
-    font-weight: 800;
-    color: white;
-    letter-spacing: -2px;
-    box-shadow: 0 0 70px rgba(13,107,93,0.45);
-    margin-bottom: 28px;
-  }
-
-  .available-badge {
+  .badge {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(13,107,93,0.25);
-    border: 1px solid rgba(13,107,93,0.5);
+    background: rgba(13,107,93,0.3);
+    border: 1px solid rgba(78,205,196,0.45);
     color: #4ecdc4;
     font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
     text-transform: uppercase;
     padding: 7px 18px;
     border-radius: 100px;
-    margin-bottom: 22px;
+    margin-bottom: 20px;
   }
-  .available-badge .dot {
+  .badge .dot {
     width: 7px; height: 7px;
     border-radius: 50%;
     background: #4ecdc4;
+    box-shadow: 0 0 6px #4ecdc4;
     animation: pulse 2s infinite;
   }
   @keyframes pulse {
-    0%,100% { opacity: 1; }
-    50% { opacity: 0.3; }
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
   }
 
   h1 {
-    font-size: 64px;
+    font-size: 68px;
     font-weight: 800;
     color: #ffffff;
     line-height: 1.05;
-    margin-bottom: 14px;
+    margin-bottom: 8px;
     letter-spacing: -1.5px;
   }
-  h1 span { color: #0d6b5d; }
+  h1 em {
+    font-style: normal;
+    color: #4ecdc4;
+  }
 
   .subtitle {
     font-size: 22px;
-    color: #d98f49;
+    color: rgba(255,255,255,0.75);
     font-weight: 600;
-    margin-bottom: 36px;
-    letter-spacing: 0.3px;
+    margin-bottom: 28px;
+    letter-spacing: 0.2px;
   }
 
   .pills {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 44px;
-    max-width: 780px;
+    gap: 9px;
+    margin-bottom: 36px;
   }
   .pill {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.12);
-    color: #ccc;
-    font-size: 14px;
-    font-weight: 500;
-    padding: 7px 16px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
+    color: rgba(255,255,255,0.85);
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 6px 15px;
     border-radius: 6px;
+    letter-spacing: 0.2px;
   }
 
-  .stats-row {
+  .bottom-row {
     display: flex;
     align-items: center;
-    gap: 0;
-    margin-bottom: 40px;
+    justify-content: space-between;
+  }
+
+  .cta {
+    display: inline-block;
+    background: #d98f49;
+    color: #0a0a0a;
+    font-size: 17px;
+    font-weight: 800;
+    padding: 14px 36px;
+    border-radius: 100px;
+    letter-spacing: 0.2px;
+  }
+
+  .stats {
+    display: flex;
+    gap: 32px;
+    align-items: center;
   }
   .stat {
-    text-align: center;
-    padding: 0 40px;
+    text-align: right;
   }
   .stat .num {
-    font-size: 36px;
+    font-size: 30px;
     font-weight: 800;
     color: #ffffff;
     line-height: 1;
   }
-  .stat .label {
-    font-size: 12px;
-    color: #888;
-    font-weight: 500;
+  .stat .lbl {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
     text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 4px;
+    letter-spacing: 1.2px;
+    font-weight: 600;
+    margin-top: 2px;
   }
-  .stat-divider {
+  .stat-sep {
     width: 1px;
-    height: 48px;
-    background: rgba(255,255,255,0.1);
+    height: 38px;
+    background: rgba(255,255,255,0.12);
   }
 
-  .url {
-    font-size: 20px;
-    color: #ffffff;
-    font-weight: 700;
-    letter-spacing: 0.5px;
+  /* Top-left branding */
+  .brand {
+    position: absolute;
+    top: 52px;
+    left: 72px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
-  .url span { color: #4ecdc4; }
+  .brand-mark {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    background: #0d6b5d;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; font-weight: 800; color: white; letter-spacing: -1px;
+  }
+  .brand-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: 0.3px;
+  }
+  .brand-url {
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    font-weight: 500;
+    margin-top: 1px;
+  }
 </style>
 </head>
 <body>
 <div class="banner">
-  <div class="orb"></div>
-  <div class="orb2"></div>
+  <div class="bg-photo"></div>
+  <div class="overlay"></div>
 
-  <div class="content">
-    <div class="initials-circle">SF</div>
-    <div class="available-badge">
-      <span class="dot"></span>
-      Available for Projects
+  <!-- Top-left brand -->
+  <div class="brand">
+    <div class="brand-mark">SF</div>
+    <div>
+      <div class="brand-name">Syed Fazli</div>
+      <div class="brand-url">syedfazli.com</div>
     </div>
-    <h1>Syed <span>Fazli</span></h1>
-    <p class="subtitle">AI-Powered Full-Stack &amp; LMS Developer</p>
+  </div>
+
+  <!-- Bottom content -->
+  <div class="content">
+    <div class="badge"><span class="dot"></span> Available for Projects</div>
+    <h1>Full-Stack &amp; LMS<br><em>Developer</em></h1>
+    <p class="subtitle">AI-powered platforms · Moodle LMS · Enterprise automation</p>
     <div class="pills">
-      <span class="pill">Moodle LMS</span>
       <span class="pill">React</span>
       <span class="pill">Node.js</span>
+      <span class="pill">Moodle LMS</span>
       <span class="pill">PHP / MySQL</span>
       <span class="pill">Python</span>
       <span class="pill">Power BI</span>
       <span class="pill">Automation</span>
     </div>
-    <div class="stats-row">
-      <div class="stat">
-        <div class="num">8+</div>
-        <div class="label">Years Experience</div>
-      </div>
-      <div class="stat-divider"></div>
-      <div class="stat">
-        <div class="num">50+</div>
-        <div class="label">Projects Delivered</div>
-      </div>
-      <div class="stat-divider"></div>
-      <div class="stat">
-        <div class="num">3</div>
-        <div class="label">Countries</div>
+    <div class="bottom-row">
+      <a class="cta">Work With Me</a>
+      <div class="stats">
+        <div class="stat">
+          <div class="num">8+</div>
+          <div class="lbl">Yrs Exp</div>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="stat">
+          <div class="num">50+</div>
+          <div class="lbl">Projects</div>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="stat">
+          <div class="num">3</div>
+          <div class="lbl">Countries</div>
+        </div>
       </div>
     </div>
-    <p class="url">🌐 <span>syedfazli.com</span></p>
   </div>
 </div>
 </body>
